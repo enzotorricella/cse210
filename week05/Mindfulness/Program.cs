@@ -2,9 +2,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Exceeds the core requirements: the reflection activity cycles through
-        // every question before repeating one, and the listing activity cycles
-        // through every prompt before repeating one during the same program run.
+        
         bool isRunning = true;
 
         while (isRunning)
