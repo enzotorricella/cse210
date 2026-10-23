@@ -98,7 +98,13 @@ public class GoalManager
         string description = Console.ReadLine();
 
         Console.Write("What is the amount of points associated with this goal? ");
-        int points = int.Parse(Console.ReadLine());
+        int points = ReadIntInput("Points: ");
+
+        if (typeChoice != "1" && typeChoice != "2" && typeChoice != "3")
+        {
+            Console.WriteLine("Invalid goal type.");
+            return;
+        }
 
         if (typeChoice == "1")
         {
@@ -111,10 +117,10 @@ public class GoalManager
         else if (typeChoice == "3")
         {
             Console.Write("How many times does this goal need to be accomplished for a bonus? ");
-            int target = int.Parse(Console.ReadLine());
+            int target = ReadIntInput("Target completions: ");
 
             Console.Write("What is the bonus for accomplishing it that many times? ");
-            int bonus = int.Parse(Console.ReadLine());
+            int bonus = ReadIntInput("Completion bonus: ");
 
             _goals.Add(new ChecklistGoal(name, description, points, target, bonus));
         }
@@ -139,8 +145,13 @@ private int ReadIntInput(string prompt)
             Console.WriteLine($"{i + 1}. {_goals[i].GetShortName()}");
         }
 
-        Console.Write("Which goal did you accomplish? ");
-        int goalIndex = int.Parse(Console.ReadLine()) - 1;
+        if (_goals.Count == 0)
+        {
+            Console.WriteLine("No goals available. Create one first.");
+            return;
+        }
+
+        int goalIndex = ReadIntInput("Which goal did you accomplish? ") - 1;
 
         if (goalIndex >= 0 && goalIndex < _goals.Count)
         {
